@@ -6,6 +6,10 @@ plugins {
     id("publication.module")
 }
 
+composeCompiler {
+    enableStrongSkippingMode = true
+}
+
 kotlin {
     applyDefaultHierarchyTemplate()
     androidTarget {
