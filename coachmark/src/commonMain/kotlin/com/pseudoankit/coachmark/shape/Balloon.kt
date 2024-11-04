@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Color
@@ -42,9 +43,8 @@ public fun Balloon(
 
     Box(
         modifier = Modifier
+            .clip(balloonShape(arrow, density, cornerRadius))
             .graphicsLayer {
-                shape = balloonShape(arrow, density, cornerRadius)
-                clip = true
                 this.shadowElevation = shadowElevation.toPx(density)
             }
             .background(bgColor)
@@ -58,7 +58,6 @@ public fun Balloon(
             .then(modifier),
         content = content
     )
-    PaddingValues().calculateBottomPadding()
 }
 
 private fun balloonShape(
