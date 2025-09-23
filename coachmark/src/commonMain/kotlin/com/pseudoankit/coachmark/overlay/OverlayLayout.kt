@@ -62,8 +62,8 @@ public fun OverlayLayout(
 
         // place children
         layout(constraints.maxWidth, constraints.maxHeight) {
-            place(placeableCurrent, configCurrent)
-            place(placeablePrevious, configPrevious)
+            place(placeableCurrent, configCurrent, constraints.maxWidth, constraints.maxHeight)
+            place(placeablePrevious, configPrevious, constraints.maxWidth, constraints.maxHeight)
         }
     }
 }
@@ -125,8 +125,14 @@ private fun measure(
  * Centralizes null checks and switching on toolTipPlacement value.
  * @param placeable no-op if null
  * @param config no-op if null
+ * @param containerWidth the width of the container overlay
+ * @param containerHeight the height of the container overlay
  */
-private fun Placeable.PlacementScope.place(placeable: Placeable?, config: TooltipConfig?) {
+private fun Placeable.PlacementScope.place(
+    placeable: Placeable?, config: TooltipConfig?,
+    containerWidth: Int,
+    containerHeight: Int
+) {
     if (placeable != null && config != null) {
         val layout = config.layout
         var x = 0
@@ -141,6 +147,10 @@ private fun Placeable.PlacementScope.place(placeable: Placeable?, config: Toolti
 
         fun centerHorizontally() =
             (layout.startX + calculateCenteringOffset(layout.width, placeable.width)).toInt()
+
+        fun centerVerticallyToScreen() = (containerHeight - placeable.height) / 2
+
+        fun centerHorizontallyToScreen() = (containerWidth - placeable.width) / 2
 
         when (config.toolTipPlacement) {
             ToolTipPlacement.Start -> {
@@ -161,6 +171,11 @@ private fun Placeable.PlacementScope.place(placeable: Placeable?, config: Toolti
             ToolTipPlacement.Bottom -> {
                 x = centerHorizontally()
                 y = layout.endY.toInt()
+            }
+
+            ToolTipPlacement.ScreenCenter -> {
+                x = centerHorizontallyToScreen()
+                y = centerVerticallyToScreen()
             }
         }
 
