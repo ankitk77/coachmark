@@ -53,5 +53,15 @@ public data class HighlightedViewConfig(
                 )
             }
         }
+
+        /**
+         * Shape that doesn't highlight the view in any way.
+         */
+        public object None : Shape {
+            override fun pathToHighlight(
+                density: Density,
+                size: Size
+            ): Path = Path()
+        }
     }
 }
