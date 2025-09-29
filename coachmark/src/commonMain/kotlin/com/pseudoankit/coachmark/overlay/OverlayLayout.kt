@@ -129,7 +129,8 @@ private fun measure(
  * @param containerHeight the height of the container overlay
  */
 private fun Placeable.PlacementScope.place(
-    placeable: Placeable?, config: TooltipConfig?,
+    placeable: Placeable?,
+    config: TooltipConfig?,
     containerWidth: Int,
     containerHeight: Int
 ) {
