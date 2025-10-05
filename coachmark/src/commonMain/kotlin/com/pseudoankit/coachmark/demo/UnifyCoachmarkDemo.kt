@@ -24,7 +24,7 @@ import com.pseudoankit.coachmark.shape.Arrow
 import com.pseudoankit.coachmark.shape.Balloon
 import com.pseudoankit.coachmark.util.CoachMarkKey
 
-public enum class Keys { Text1, Text2, TextStart, TextBottom, TextTop }
+public enum class Keys { Text1, Text2, TextCenter, TextStart, TextBottom, TextTop }
 
 
 @Composable
@@ -83,6 +83,18 @@ private fun ColumnScope.PlotTextsAndUseLocalCoachMarkScope() {
         alignment = Alignment.Start,
         key = Keys.Text2,
         placement = ToolTipPlacement.End
+    )
+
+    CoachMarkTargetText(
+        text = "Will show tooltip centrally",
+        alignment = Alignment.CenterHorizontally,
+        key = Keys.TextCenter,
+        placement = ToolTipPlacement.ScreenCenter,
+        tooltip = {
+            Balloon(arrow = Arrow.Top()) {
+                Text(text = "tooltip on screen center at enableCoachmark method", color = Color.White)
+            }
+        }
     )
 
     CoachMarkTargetText(
@@ -153,6 +165,12 @@ private fun Tooltip(key: CoachMarkKey) {
         Keys.Text2 -> {
             Balloon(arrow = Arrow.Start()) {
                 Text(text = "Highlighting Text2  root level", color = Color.White)
+            }
+        }
+
+        Keys.TextCenter -> {
+            Balloon(arrow = Arrow.Top()) {
+                Text(text = "A tooltip on screen center root level", color = Color.White)
             }
         }
 

@@ -26,5 +26,11 @@ public enum class ToolTipPlacement {
     /**
      * denotes that tooltip will be placed at bottom of actual view
      */
-    Bottom
+    Bottom,
+
+    /**
+     * denotes that tooltip will be placed at the center of the screen, regardless of the actual view.
+     */
+    ScreenCenter
+
 }
