@@ -46,13 +46,33 @@ publishing {
     }
 }
 
+val signingKeyId = System.getenv("OSS_SIGNING_KEY_ID").orEmpty()
+val signingKey = System.getenv("OSS_SIGNING_KEY")?.replace("\\n", "\n")
+val signingPassword = System.getenv("OSS_SIGNING_PASSWORD")
+
 signing {
-    useInMemoryPgpKeys(
-        System.getenv("OSS_SIGNING_KEY_ID"),
-        System.getenv("OSS_SIGNING_KEY"),
-        System.getenv("OSS_SIGNING_PASSWORD"),
-    )
+    if (signingKey.isNullOrBlank()) {
+        logger.warn("OSS_SIGNING_KEY is not set; publishing tasks will fail until signing secrets are provided.")
+    }
+
+    if (signingKeyId.isBlank()) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    } else {
+        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    }
+
     sign(publishing.publications)
+}
+
+tasks.withType<Sign>().configureEach {
+    doFirst {
+        if (signingKey.isNullOrBlank()) {
+            throw GradleException("Missing OSS_SIGNING_KEY. Export it locally or configure the GitHub Actions secret before publishing.")
+        }
+        if (signingPassword.isNullOrBlank()) {
+            throw GradleException("Missing OSS_SIGNING_PASSWORD. Export it locally or configure the GitHub Actions secret before publishing.")
+        }
+    }
 }
 
 // TODO: remove after https://youtrack.jetbrains.com/issue/KT-46466 is fixed
