@@ -1,3 +1,5 @@
+import java.util.Base64
+
 plugins {
     `maven-publish`
     signing
@@ -47,7 +49,15 @@ publishing {
 }
 
 val signingKeyId = System.getenv("OSS_SIGNING_KEY_ID").orEmpty()
-val signingKey = System.getenv("OSS_SIGNING_KEY")?.replace("\\n", "\n")
+val signingKey = System.getenv("OSS_SIGNING_KEY")
+    ?.replace("\\n", "\n")
+    ?.let { key ->
+        runCatching {
+            String(Base64.getDecoder().decode(key))
+        }.getOrNull()
+            ?.takeIf { decodedKey -> decodedKey.contains("BEGIN PGP PRIVATE KEY BLOCK") }
+            ?: key
+    }
 val signingPassword = System.getenv("OSS_SIGNING_PASSWORD")
 
 signing {
