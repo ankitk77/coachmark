@@ -1,6 +1,6 @@
 # Compose Multiplatform Coachmark/Onboarding Library
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.pseudoankit/coachmark/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.pseudoankit/coachmark)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.pseudoankit/coachmark)](https://central.sonatype.com/artifact/io.github.pseudoankit/coachmark)
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
 
 A lightweight Compose multiplatform library dedicated to creating seamless onboarding experiences.
