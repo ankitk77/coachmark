@@ -32,8 +32,14 @@ jobs:
           test -n "$OSS_SIGNING_PASSWORD" || { echo "Missing OSS_SIGNING_PASSWORD or SIGNING_PASSWORD secret"; exit 1; }
           test -n "$OSS_SIGNING_KEY" || { echo "Missing OSS_SIGNING_KEY or SIGNING_KEY secret"; exit 1; }
           echo "Signing key length: ${#OSS_SIGNING_KEY}"
-          [[ "$OSS_SIGNING_KEY" == *"BEGIN PGP PRIVATE KEY BLOCK"* ]] || { echo "Signing key is not a PGP private key"; exit 1; }
-          [[ "$OSS_SIGNING_KEY" == *"END PGP PRIVATE KEY BLOCK"* ]] || { echo "Signing key is missing the PGP private key footer"; exit 1; }
+          if [[ "$OSS_SIGNING_KEY" == *"BEGIN PGP PRIVATE KEY BLOCK"* ]]; then
+            echo "Signing key format: ASCII-armored private key"
+          elif [[ "$OSS_SIGNING_KEY" == *"BEGIN PGP PUBLIC KEY BLOCK"* ]]; then
+            echo "Signing key format: public key block; publishing requires the private key"
+            exit 1
+          else
+            echo "Signing key format: no ASCII armor header detected; Gradle will validate the key"
+          fi
 
       - name: Publish Artifact to Sonatype
         env:
