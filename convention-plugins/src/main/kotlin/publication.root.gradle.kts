@@ -10,8 +10,8 @@ allprojects {
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
             stagingProfileId.set(System.getenv("OSS_STAGING_PROFILE_ID"))
             username.set(System.getenv("OSS_USERNAME"))
             password.set(System.getenv("OSS_PASSWORD"))
