@@ -31,6 +31,7 @@ jobs:
           test -n "$OSS_STAGING_PROFILE_ID" || { echo "Missing OSS_STAGING_PROFILE_ID or OSSRH_STAGING_PROFILE_ID secret"; exit 1; }
           test -n "$OSS_SIGNING_PASSWORD" || { echo "Missing OSS_SIGNING_PASSWORD or SIGNING_PASSWORD secret"; exit 1; }
           test -n "$OSS_SIGNING_KEY" || { echo "Missing OSS_SIGNING_KEY or SIGNING_KEY secret"; exit 1; }
+          echo "Using Sonatype Central Portal token credentials from OSS_USERNAME/OSS_PASSWORD."
           echo "Signing key length: ${#OSS_SIGNING_KEY}"
           if [[ "$OSS_SIGNING_KEY" == *"BEGIN PGP PRIVATE KEY BLOCK"* ]]; then
             echo "Signing key format: ASCII-armored private key"
