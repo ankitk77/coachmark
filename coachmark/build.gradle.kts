@@ -1,13 +1,15 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import com.vanniktech.maven.publish.KotlinMultiplatform
+import java.util.Properties
+import java.io.File
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
-    id("publication.module")
-    id("com.vanniktech.maven.publish")
+    id("com.vanniktech.maven.publish") version "0.28.0"
+    signing
 }
 
 composeCompiler {
@@ -62,6 +64,25 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+// Read your local properties file manually to guarantee Gradle parses it
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
+}
+
+signing {
+    val keyId = localProperties.getProperty("signing.keyId")
+    val password = localProperties.getProperty("signing.password")
+    val secretKey = localProperties.getProperty("signing.secretKey")
+
+    if (!keyId.isNullOrEmpty() && !secretKey.isNullOrEmpty()) {
+        // Force-injects the keys cleanly directly into the signing engine
+        useInMemoryPgpKeys(keyId, secretKey, password)
     }
 }
 
