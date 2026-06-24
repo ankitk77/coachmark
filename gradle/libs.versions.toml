@@ -8,7 +8,7 @@ compileSdk = "34"
 targetSdk = "34"
 
 [libraries]
-compose-coachmark = "io.github.pseudoankit:coachmark:2.0.3"
+compose-coachmark = "io.github.ankitk77:coachmark:4.0.0"
 compose-lint = "com.slack.lint.compose:compose-lint-checks:1.3.1"
 
 gradle-publish = "io.github.gradle-nexus.publish-plugin:io.github.gradle-nexus.publish-plugin.gradle.plugin:2.0.0-rc-1"
