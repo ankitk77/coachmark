@@ -1,7 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import java.util.Properties
-import java.io.File
 
 plugins {
     alias(libs.plugins.android.library)
@@ -68,17 +67,17 @@ android {
 }
 
 // Read your local properties file manually to guarantee Gradle parses it
-val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
+val properties = Properties().apply {
+    val file = rootProject.file("gradle.properties")
     if (file.exists()) {
         file.inputStream().use { load(it) }
     }
 }
 
 signing {
-    val keyId = localProperties.getProperty("signing.keyId")
-    val password = localProperties.getProperty("signing.password")
-    val secretKey = localProperties.getProperty("signing.secretKey")
+    val keyId = properties.getProperty("signing.keyId")
+    val password = properties.getProperty("signing.password")
+    val secretKey = properties.getProperty("signing.secretKey")
 
     if (!keyId.isNullOrEmpty() && !secretKey.isNullOrEmpty()) {
         // Force-injects the keys cleanly directly into the signing engine
@@ -91,7 +90,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.ankitk77",
         artifactId = "coachmark",
-        version = "3.0.8"
+        version = "4.0.0"
     )
 
     // POM configuration
