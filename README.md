@@ -1,6 +1,6 @@
 # Compose Multiplatform Coachmark/Onboarding Library
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.pseudoankit/coachmark)](https://central.sonatype.com/artifact/io.github.pseudoankit/coachmark)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.ankitk77/coachmark.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.ankitk77/coachmark)
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
 
 A lightweight Compose multiplatform library dedicated to creating seamless onboarding experiences.
@@ -28,7 +28,7 @@ A lightweight Compose multiplatform library dedicated to creating seamless onboa
     
 ```kotlin
 dependencies {
-    implementation("io.github.pseudoankit:coachmark:<latest_version🔝>")
+    implementation("io.github.ankitk77:coachmark:<latest_version🔝>")
 }
 ```
 </details>
@@ -43,7 +43,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.github.pseudoankit:coachmark:<latest_version🔝>")
+                implementation("io.github.ankitk77:coachmark:<latest_version🔝>")
             }
         }
     }
@@ -104,7 +104,7 @@ Overlay Logic referred from <a href = "https://github.com/svenjacobs/reveal">rev
 
 # License
 ```xml
-Copyright 2024 pseudoankit (Ankit)
+Copyright 2024 ankitk77 (Ankit)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
