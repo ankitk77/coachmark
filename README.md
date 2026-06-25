@@ -3,6 +3,19 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.ankitk77/coachmark.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.ankitk77/coachmark)
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
 
+## ⚙️ Installation
+
+> [!WARNING]
+> **Important Artifact Group Change!** > The library has moved from `io.github.pseudoankit` to `io.github.ankitk77`. Please update your dependencies to receive future updates.
+```kotlin
+// ❌ Old artifact (deprecated)
+implementation("io.github.pseudoankit:coachmark:<latest_version>")
+
+//  New artifact
+implementation("io.github.ankitk77:coachmark:<latest_version>")
+```
+
+
 A lightweight Compose multiplatform library dedicated to creating seamless onboarding experiences.
 
 | android | iOS |
